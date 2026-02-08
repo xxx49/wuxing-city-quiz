@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五行城市测验 - 东方新中式设计系统</title>
+    <style>
+        /* ========================================
+           五行城市测验 - 东方新中式设计系统
+           资深UI设计师专业设计方案
+           ======================================== */
+
+        /* ==================== 1. 配色系统 ==================== */
+        :root {
+            /* 墨色系 */
+            --color-ink-dark: #2C1810;
+            --color-ink-medium: #4A3728;
+            --color-ink-light: #6B6B6B;
+
+            /* 红色系 */
+            --color-red-primary: #C8102E;
+            --color-red-soft: #D64F4F;
+            --color-red-muted: #E8B4B4;
+
+            /* 金色系 */
+            --color-gold-bright: #D4AF37;
+            --color-gold-medium: #C9A227;
+            --color-gold-dark: #8B7355;
+
+            /* 背景色 */
+            --color-bg-paper: #FDF5E6;
+            --color-bg-warm: #FFF8DC;
+            --color-bg-light: #FAF7F2;
+
+            /* 功能色 */
+            --color-success: #6B8E23;
+            --color-warning: #D4AF37;
+            --color-error: #C8102E;
+
+            /* 动画时长 */
+            --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ==================== 2. 基础重置 ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "STSong", "SimSun", "Noto Sans SC", sans-serif;
+            background: var(--color-bg-paper);
+            color: var(--color-ink-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ==================== 3. 水墨背景 ==================== */
+        .ink-wash-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(
+                    ellipse at 30% 20%,
+                    rgba(44, 24, 16, 0.04) 0%,
+                    transparent 50%
+                ),
+                radial-gradient(
+                    ellipse at 70% 80%,
+                    rgba(200, 16, 46, 0.025) 0%,
+                    transparent 50%
+                ),
+                radial-gradient(
+                    ellipse at 50% 50%,
+                    rgba(212, 175, 55, 0.02) 0%,
+                    transparent 60%
+                ),
+                var(--color-bg-paper);
+            z-index: -1;
+        }
+
+        /* ==================== 4. 排版系统 ==================== */
+        .typography-h1 {
+            font-family: "STKaiti", "KaiTi", "楷体", serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--color-ink-dark);
+            letter-spacing: 0.08em;
+            line-height: 1.4;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .typography-h2 {
+            font-family: "STKaiti", "KaiTi", "楷体", serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--color-ink-medium);
+            letter-spacing: 0.05em;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .typography-h3 {
+            font-family: "STKaiti", "KaiTi", "楷体", serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-ink-medium);
+            letter-spacing: 0.03em;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .typography-body {
+            font-size: 16px;
+            color: var(--color-ink-light);
+            line-height: 1.8;
+            letter-spacing: 0.01em;
+            margin-bottom: 16px;
+        }
+
+        .typography-caption {
+            font-size: 14px;
+            color: var(--color-ink-light);
+            opacity: 0.8;
+        }
+
+        /* ==================== 5. 布局容器 ==================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+        }
+
+        /* ==================== 6. 卡片系统 ==================== */
+        .card {
+            background: var(--color-bg-warm);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow:
+                0 2px 8px rgba(44, 24, 16, 0.06),
+                0 8px 24px rgba(44, 24, 16, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: all var(--transition-base);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 4px 16px rgba(44, 24, 16, 0.1),
+                0 12px 32px rgba(44, 24, 16, 0.08);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        /* ==================== 7. 五行元素 ==================== */
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .element-card {
+            background: var(--color-bg-warm);
+            border: 2px solid var(--color-gold-medium);
+            border-radius: 12px;
+            padding: 24px 16px;
+            text-align: center;
+            transition: all var(--transition-base);
+            cursor: pointer;
+        }
+
+        .element-card:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 8px 24px rgba(44, 24, 16, 0.12),
+                0 4px 8px rgba(212, 175, 55, 0.1);
+            border-color: var(--color-gold-bright);
+        }
+
+        .element-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 12px;
+            position: relative;
+            transition: all var(--transition-base);
+        }
+
+        .element-wood {
+            background: linear-gradient(135deg, #6B8E23 0%, #8FBC8F 100%);
+            box-shadow:
+                0 4px 12px rgba(107, 142, 35, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.2);
+        }
+
+        .element-fire {
+            background: linear-gradient(135deg, #C8102E 0%, #E64F4F 100%);
+            box-shadow:
+                0 4px 12px rgba(200, 16, 46, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.2);
+        }
+
+        .element-earth {
+            background: linear-gradient(135deg, #8B7355 0%, #C9A227 100%);
+            box-shadow:
+                0 4px 12px rgba(139, 115, 85, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.2);
+        }
+
+        .element-metal {
+            background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%);
+            box-shadow:
+                0 4px 12px rgba(212, 175, 55, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.2);
+        }
+
+        .element-water {
+            background: linear-gradient(135deg, #4A90A4 0%, #5DADE2 100%);
+            box-shadow:
+                0 4px 12px rgba(74, 144, 164, 0.3),
+                inset 0 1px 2px rgba(255, 255, 255, 0.2);
+        }
+
+        .element-card:hover .element-icon {
+            transform: scale(1.1);
+        }
+
+        .element-name {
+            font-family: "STKaiti", "KaiTi", "楷体", serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-ink-medium);
+            margin-bottom: 4px;
+        }
+
+        .element-desc {
+            font-size: 12px;
+            color: var(--color-ink-light);
+            opacity: 0.8;
+        }
+
+        /* ==================== 8. 算盘进度条 ==================== */
+        .progress-section {
+            margin: 40px 0;
+        }
+
+        .abacus-progress {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 0;
+            justify-content: center;
+        }
+
+        .abacus-frame {
+            flex: 0 0 auto;
+            height: 52px;
+            background: linear-gradient(
+                to bottom,
+                rgba(139, 115, 85, 0.1) 0%,
+                rgba(139, 115, 85, 0.05) 50%,
+                rgba(139, 115, 85, 0.1) 100%
+            );
+            border-radius: 10px;
+            border: 2px solid var(--color-gold-medium);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 8px;
+            position: relative;
+        }
+
+        .abacus-bead {
+            width: 36px;
+            height: 44px;
+            background: linear-gradient(
+                135deg,
+                var(--color-gold-bright) 0%,
+                var(--color-gold-medium) 50%,
+                var(--color-gold-dark) 100%
+            );
+            border-radius: 18px;
+            border: 2px solid var(--color-gold-dark);
+            box-shadow:
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                0 4px 8px rgba(44, 24, 16, 0.2);
+            transition: all var(--transition-base);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .abacus-bead::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+        }
+
+        .abacus-bead.active {
+            background: linear-gradient(
+                135deg,
+                #E64F4F 0%,
+                #C8102E 50%,
+                #A00D25 100%
+            );
+            border-color: #8B0000;
+            box-shadow:
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                0 4px 12px rgba(200, 16, 46, 0.4);
+        }
+
+        .progress-label {
+            font-family: "STKaiti", "KaiTi", "楷体", serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-ink-medium);
+            min-width: 70px;
+            text-align: center;
+        }
+
+        /* ==================== 9. 印章元素 ==================== */
+        .seal-mark {
+            width: 52px;
+            height: 52px;
+            border: 2px solid var(--color-gold-bright);
+            border-radius: 5px;
+            color: var(--color-red-primary);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "STKaiti", "KaiTi", "楷体", serif;
+            background: linear-gradient(
+                135deg,
+                rgba(200, 16, 46, 0.05) 0%,
+                rgba(200, 16, 46, 0.02) 100%
+            );
+            box-shadow:
+                inset 0 1px 2px rgba(200, 16, 46, 0.1),
+                0 2px 8px rgba(200, 16, 46, 0.15);
+            position: relative;
+            transition: all var(--transition-base);
+        }
+
+        .seal-mark:hover {
+            transform: scale(1.05);
+        }
+
+        .seal-mark.brand {
+            transform: rotate(-5deg);
+        }
+
+        .seal-mark.certify {
+            transform: rotate(3deg);
+        }
+
+        /* ==================== 10. 按钮系统 ==================== */
+        .button-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .button {
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-family: "STSong", "SimSong", "宋体", serif;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-base);
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, var(--color-red-soft), var(--color-red-primary));
+            color: white;
+            box-shadow: 0 4px 12px rgba(200, 16, 46, 0.25);
+        }
+
+        .button-primary::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width var(--transition-slow), height var(--transition-slow);
+        }
+
+        .button-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(200, 16, 46, 0.35);
+        }
+
+        .button-primary:active {
+            transform: translateY(0);
+        }
+
+        .button-secondary {
+            background: transparent;
+            color: var(--color-ink-medium);
+            border: 2px solid var(--color-gold-medium);
+        }
+
+        .button-secondary:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--color-gold-bright);
+        }
+
+        /* ==================== 11. 颜色展示卡片 ==================== */
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .color-swatch {
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform var(--transition-base);
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.05);
+        }
+
+        .color-box {
+            width: 100%;
+            height: 60px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .color-name {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-ink-medium);
+            margin-bottom: 4px;
+        }
+
+        .color-hex {
+            font-size: 11px;
+            color: var(--color-ink-light);
+            font-family: monospace;
+        }
+
+        /* ==================== 12. 示例问题卡片 ==================== */
+        .quiz-card {
+            background: var(--color-bg-warm);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow:
+                0 4px 16px rgba(44, 24, 16, 0.08),
+                0 8px 32px rgba(44, 24, 16, 0.04);
+            border: 2px solid var(--color-gold-medium);
+            margin-top: 24px;
+        }
+
+        .quiz-question {
+            font-family: "STKaiti", "KaiTi", "楷体", serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--color-ink-dark);
+            margin-bottom: 24px;
+            letter-spacing: 0.03em;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .quiz-option {
+            background: var(--color-bg-paper);
+            border: 2px solid rgba(139, 115, 85, 0.2);
+            border-radius: 10px;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--color-gold-medium);
+            background: var(--color-bg-warm);
+            transform: translateX(4px);
+        }
+
+        .quiz-option.correct {
+            border-color: var(--color-success);
+            background: rgba(107, 142, 35, 0.1);
+        }
+
+        .quiz-option.wrong {
+            border-color: var(--color-error);
+            background: rgba(200, 16, 46, 0.1);
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .option-letter {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--color-gold-medium);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .option-text {
+            font-size: 16px;
+            color: var(--color-ink-medium);
+        }
+
+        /* ==================== 13. 动画定义 ==================== */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* 交错延迟 */
+        .section:nth-child(1) { animation-delay: 0ms; }
+        .section:nth-child(2) { animation-delay: 100ms; }
+        .section:nth-child(3) { animation-delay: 200ms; }
+        .section:nth-child(4) { animation-delay: 300ms; }
+        .section:nth-child(5) { animation-delay: 400ms; }
+
+        /* ==================== 14. 响应式设计 ==================== */
+        @media (max-width: 768px) {
+            .typography-h1 {
+                font-size: 32px;
+            }
+
+            .typography-h2 {
+                font-size: 26px;
+            }
+
+            .typography-h3 {
+                font-size: 20px;
+            }
+
+            .container {
+                padding: 20px 16px;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .elements-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .abacus-frame {
+                padding: 0 12px;
+                gap: 6px;
+            }
+
+            .abacus-bead {
+                width: 32px;
+                height: 40px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+
+        /* ==================== 15. 暗色模式 ==================== */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-ink-dark: #FDF5E6;
+                --color-ink-medium: #FFF8DC;
+                --color-ink-light: #E8E8E8;
+                --color-bg-paper: #1A1410;
+                --color-bg-warm: #2C1810;
+                --color-bg-light: #3D2A1C;
+                --color-gold-bright: #F4D03F;
+            }
+
+            .ink-wash-background {
+                background:
+                    radial-gradient(
+                        ellipse at 30% 20%,
+                        rgba(253, 245, 230, 0.05) 0%,
+                        transparent 50%
+                    ),
+                    radial-gradient(
+                        ellipse at 70% 80%,
+                        rgba(244, 208, 63, 0.03) 0%,
+                        transparent 50%
+                    ),
+                    var(--color-bg-paper);
+            }
+
+            .quiz-option {
+                background: var(--color-bg-light);
+            }
+        }
+
+        /* ==================== 16. 减少动画（无障碍） ==================== */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ink-wash-background"></div>
+
+    <div class="container">
+        <!-- 头部 -->
+        <header class="section">
+            <h1 class="typography-h1">五行城市测验</h1>
+            <p style="text-align: center; color: var(--color-ink-light); font-size: 16px; margin-top: 8px;">
+                东方新中式设计系统完整展示
+            </p>
+        </header>
+
+        <!-- 配色方案 -->
+        <section class="section">
+            <h2 class="typography-h2">一、配色方案</h2>
+            <p class="typography-body">采用墨色、朱红、金色为核心的传统文化配色，降低纯度增加现代感。</p>
+
+            <div class="color-palette">
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #2C1810;"></div>
+                    <div class="color-name">墨黑</div>
+                    <div class="color-hex">#2C1810</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #4A3728;"></div>
+                    <div class="color-name">浓墨</div>
+                    <div class="color-hex">#4A3728</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #C8102E;"></div>
+                    <div class="color-name">朱红</div>
+                    <div class="color-hex">#C8102E</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #D4AF37;"></div>
+                    <div class="color-name">金色</div>
+                    <div class="color-hex">#D4AF37</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #8B7355;"></div>
+                    <div class="color-name">棕褐</div>
+                    <div class="color-hex">#8B7355</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-box" style="background: #FDF5E6;"></div>
+                    <div class="color-name">纸白</div>
+                    <div class="color-hex">#FDF5E6</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 五行元素 -->
+        <section class="section">
+            <h2 class="typography-h2">二、五行元素视觉</h2>
+            <p class="typography-body">五行图标采用渐变色与光晕效果，既保留传统意象又具有现代美感。</p>
+
+            <div class="elements-grid">
+                <div class="element-card" onclick="selectElement('wood')">
+                    <div class="element-icon element-wood">🌳</div>
+                    <div class="element-name">木</div>
+                    <div class="element-desc">生机勃勃</div>
+                </div>
+                <div class="element-card" onclick="selectElement('fire')">
+                    <div class="element-icon element-fire">🔥</div>
+                    <div class="element-name">火</div>
+                    <div class="element-desc">热情向上</div>
+                </div>
+                <div class="element-card" onclick="selectElement('earth')">
+                    <div class="element-icon element-earth">⛰️</div>
+                    <div class="element-name">土</div>
+                    <div class="element-desc">稳重踏实</div>
+                </div>
+                <div class="element-card" onclick="selectElement('metal')">
+                    <div class="element-icon element-metal">⚙️</div>
+                    <div class="element-name">金</div>
+                    <div class="element-desc">坚韧锐利</div>
+                </div>
+                <div class="element-card" onclick="selectElement('water')">
+                    <div class="element-icon element-water">💧</div>
+                    <div class="element-name">水</div>
+                    <div class="element-desc">灵动智慧</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 算盘进度条 -->
+        <section class="section">
+            <h2 class="typography-h2">三、算盘进度条</h2>
+            <p class="typography-body">采用传统算盘珠设计，红色表示已完成，金色表示未完成，直观展示答题进度。</p>
+
+            <div class="progress-section">
+                <div class="abacus-progress">
+                    <div class="progress-label">第 3 题</div>
+                    <div class="abacus-frame">
+                        <div class="abacus-bead active"></div>
+                        <div class="abacus-bead active"></div>
+                        <div class="abacus-bead active"></div>
+                        <div class="abacus-bead"></div>
+                        <div class="abacus-bead"></div>
+                    </div>
+                    <div class="progress-label">共 5 题</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 印章元素 -->
+        <section class="section">
+            <h2 class="typography-h2">四、印章元素运用</h2>
+            <p class="typography-body">印章仅用于品牌标识和认证状态，旋转角度增加趣味但不显俗气。</p>
+
+            <div style="display: flex; gap: 40px; justify-content: center; align-items: center; margin-top: 24px;">
+                <div style="text-align: center;">
+                    <div class="seal-mark brand">五行</div>
+                    <p class="typography-caption" style="margin-top: 8px;">品牌印章</p>
+                </div>
+                <div style="text-align: center;">
+                    <div class="seal-mark certify">完成</div>
+                    <p class="typography-caption" style="margin-top: 8px;">认证印章</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 示例问答卡片 -->
+        <section class="section">
+            <h2 class="typography-h2">五、示例问题卡片</h2>
+            <p class="typography-body">问答卡片采用暖色背景、金色边框，选项悬停时有动画反馈。</p>
+
+            <div class="quiz-card">
+                <div class="quiz-question">以下哪座城市最符合"木"的特质？</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="selectOption(this, false)">
+                        <div class="option-letter">A</div>
+                        <div class="option-text">上海 - 现代都市</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(this, true)">
+                        <div class="option-letter">B</div>
+                        <div class="option-text">杭州 - 绿色园林</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(this, false)">
+                        <div class="option-letter">C</div>
+                        <div class="option-text">深圳 - 科技创新</div>
+                    </div>
+                    <div class="quiz-option" onclick="selectOption(this, false)">
+                        <div class="option-letter">D</div>
+                        <div class="option-text">北京 - 历史古都</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 按钮系统 -->
+        <section class="section">
+            <h2 class="typography-h2">六、按钮交互</h2>
+            <p class="typography-body">主按钮采用朱红渐变，次按钮采用透明背景金色边框，悬停时有水波纹扩散效果。</p>
+
+            <div class="button-group">
+                <button class="button button-primary">提交答案</button>
+                <button class="button button-secondary">下一题</button>
+                <button class="button button-secondary">查看解析</button>
+            </div>
+        </section>
+
+        <!-- 卡片系统 -->
+        <section class="section">
+            <h2 class="typography-h2">七、卡片阴影与间距</h2>
+            <p class="typography-body">卡片采用温和的圆角（16px）和多层阴影，悬停时有上浮效果。</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <h3 class="typography-h3">卡片标题</h3>
+                    <p class="typography-body">这是一段示例文字，展示卡片内部排版和间距。卡片有柔和的阴影和边框，悬停时会轻微上浮。</p>
+                </div>
+                <div class="card">
+                    <h3 class="typography-h3">五行文化</h3>
+                    <p class="typography-body">五行是中国古代哲学观念，认为木、火、土、金、水五种物质构成世界万物。</p>
+                </div>
+                <div class="card">
+                    <h3 class="typography-h3">城市特征</h3>
+                    <p class="typography-body">每个城市都有独特的五行特质，通过测验可以了解你的城市人格类型。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="section" style="text-align: center; padding: 40px 0; border-top: 2px solid rgba(212, 175, 55, 0.2);">
+            <p class="typography-caption">五行城市测验 - 东方新中式设计系统</p>
+            <p class="typography-caption" style="margin-top: 8px;">专业UI设计方案 © 2026</p>
+        </footer>
+    </div>
+
+    <script>
+        // 选项选择交互
+        function selectOption(element, isCorrect) {
+            // 重置所有选项
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
+            });
+
+            // 设置当前选项状态
+            if (isCorrect) {
+                element.classList.add('correct');
+                element.style.animation = 'pulse 0.6s ease-in-out';
+            } else {
+                element.classList.add('wrong');
+            }
+
+            // 动画结束后移除
+            setTimeout(() => {
+                element.style.animation = '';
+            }, 600);
+        }
+
+        // 五行元素选择
+        function selectElement(element) {
+            const elementNames = {
+                'wood': '木',
+                'fire': '火',
+                'earth': '土',
+                'metal': '金',
+                'water': '水'
+            };
+
+            const descriptions = {
+                'wood': '代表生机、成长、仁慈，对应春季、东方、绿色',
+                'fire': '代表热情、向上、礼貌，对应夏季、南方、红色',
+                'earth': '代表稳重、包容、诚信，对应长夏、中央、黄色',
+                'metal': '代表坚韧、正义、决断，对应秋季、西方、白色',
+                'water': '代表智慧、灵活、流动，对应冬季、北方、黑色'
+            };
+
+            alert(`${elementNames[element]}行\n\n${descriptions[element]}`);
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.animationDelay = `${index * 0.1}s`;
+
+                setTimeout(() => {
+                    section.style.opacity = '1';
+                }, 100);
+            });
+        });
+
+        // 按钮点击效果
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // 创建水波纹效果（视觉上的）
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // 实际的水波纹通过CSS的::before伪元素实现
+                console.log(`Button clicked at (${x}, ${y})`);
+            });
+        });
+    </script>
+</body>
+</html>

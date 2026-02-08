@@ -1,0 +1,721 @@
+/* ========================================
+   东方新中式设计系统 - CSS变量
+   ======================================== */
+
+:root {
+    /* 五行主色 */
+    --wuxing-wood: #4A7C23;      /* 木 - 森绿 */
+    --wuxing-fire: #C8161D;      /* 火 - 朱红 */
+    --wuxing-earth: #8B7355;     /* 土 - 褐土 */
+    --wuxing-metal: #D4AF37;     /* 金 - 金黄 */
+    --wuxing-water: #1E90FF;     /* 水 - 海蓝 */
+    --wuxing-gold: #D4AF37;      /* 金色 - 用于强调 */
+
+    /* 传统色彩 */
+    --color-ink-dark: #2C1810;      /* 墨黑 - 浓墨 */
+    --color-ink-medium: #6B6B6B;    /* 淡墨 */
+    --color-ink-light: #C8C8C8;     /* 极淡墨 */
+
+    --color-vermilion: #C8102E;     /* 朱红 */
+    --color-vermilion-dark: #8B0A12;
+    --color-vermilion-light: #E8A6A8;
+
+    --color-gold: #D4AF37;          /* 金色 */
+    --color-gold-dark: #B8941F;
+    --color-gold-light: #F0D86E;
+
+    --color-rice: #FDF5E6;          /* 宣纸白 */
+    --color-rice-dark: #F5EDE0;
+
+    /* 中性色 */
+    --color-bg-primary: var(--color-rice);
+    --color-bg-secondary: #F5F5F5;
+    --color-text-primary: var(--color-ink-dark);
+    --color-text-secondary: var(--color-ink-medium);
+
+    /* 间距系统 */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+
+    /* 圆角 */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+
+    /* 阴影 */
+    --shadow-sm: 0 2px 4px rgba(44, 24, 16, 0.08);
+    --shadow-md: 0 4px 12px rgba(44, 24, 16, 0.12);
+    --shadow-lg: 0 8px 24px rgba(44, 24, 16, 0.16);
+
+    /* 字体 */
+    --font-family-title: 'STKaiti', 'KaiTi', '楷体', serif;
+    --font-family-body: 'PingFang SC', 'Source Han Sans CN', -apple-system, sans-serif;
+    --font-family-decorative: 'STZhuan', '隶书', serif;
+
+    /* 过渡 */
+    --transition-fast: 150ms ease;
+    --transition-base: 300ms ease;
+    --transition-slow: 600ms ease;
+}
+
+/* ========================================
+   基础重置样式
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-body);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+#app {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* ========================================
+   通用组件
+   ======================================== */
+
+/* 按钮 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    font-size: 17px;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    font-family: var(--font-family-body);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-vermilion), var(--color-gold));
+    color: white;
+    box-shadow: 0 4px 12px rgba(200, 16, 46, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(200, 16, 46, 0.4);
+}
+
+.btn-secondary {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-ink-light);
+}
+
+/* 卡片 */
+.card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--space-md);
+}
+
+/* 标题 */
+.title {
+    font-family: var(--font-family-title);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+
+.subtitle {
+    font-size: 17px;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+/* 容器 */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+}
+
+/* 隐藏类 */
+.hidden {
+    display: none !important;
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn var(--transition-slow) ease-out;
+}
+
+/* ===== 3城市结果页样式 ===== */
+
+/* 结果页头部 */
+.result-header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding: 24px;
+}
+
+.result-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.result-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--color-ink-dark);
+    margin-bottom: 8px;
+}
+
+.result-subtitle {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+}
+
+/* ===== 第1城市卡片 - 主要推荐 ===== */
+.city-card.primary {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.08), rgba(212, 175, 55, 0.05));
+    border: 2px solid var(--color-vermilion);
+    padding: 32px 24px;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 32px rgba(220, 38, 38, 0.15);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.city-card.primary .city-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.city-rank {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-vermilion);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.city-name {
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--color-vermilion), var(--color-gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 16px;
+}
+
+.city-element {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.element-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.element-dot.element-wood {
+    background: var(--wuxing-wood);
+}
+
+.element-dot.element-fire {
+    background: var(--wuxing-fire);
+}
+
+.element-dot.element-earth {
+    background: var(--wuxing-earth);
+}
+
+.element-dot.element-metal {
+    background: var(--wuxing-metal);
+}
+
+.element-dot.element-water {
+    background: var(--wuxing-water);
+}
+
+.city-match {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.match-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-vermilion), var(--color-gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(220, 38, 38, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.match-value {
+    font-size: 42px;
+    font-weight: 800;
+    color: white;
+}
+
+.city-analysis {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.analysis-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--color-text-primary);
+}
+
+.analysis-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.city-suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.suggestion-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.suggestion-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.suggestion-content {
+    font-size: 15px;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+}
+
+/* ===== 第2-3城市卡片 - 次要推荐 ===== */
+.city-card.secondary {
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease-out;
+    animation-delay: 0.2s;
+}
+
+.city-card.secondary:hover {
+    border-color: var(--color-vermilion);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.city-header-compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.city-info {
+    flex: 1;
+}
+
+.city-name-small {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+}
+
+.city-element-small {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+.match-badge {
+    padding: 8px 16px;
+    background: linear-gradient(135deg, var(--color-vermilion), var(--color-gold));
+    color: white;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.city-desc-compact {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    padding-left: 12px;
+}
+
+/* 五行分析 - 紧凑版（用于第2-3城市） */
+.city-analysis-compact {
+    background: linear-gradient(135deg, rgba(200, 22, 29, 0.03), rgba(212, 175, 55, 0.02));
+    padding: 14px 16px;
+    border-radius: 8px;
+    margin: 12px 0;
+    border-left: 3px solid var(--color-vermilion);
+}
+
+.city-analysis-compact p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* ===== 底部按钮组 ===== */
+.result-actions {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== 动画 ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== 响应式适配 ===== */
+@media (max-width: 480px) {
+    .city-name {
+        font-size: 36px;
+    }
+
+    .match-circle {
+        width: 120px;
+        height: 120px;
+    }
+
+    .match-value {
+        font-size: 36px;
+    }
+
+    .city-card.primary {
+        padding: 24px 16px;
+    }
+
+    .city-name-small {
+        font-size: 20px;
+    }
+}
+
+/* ===== 第2-3城市详情样式 ===== */
+.city-details-compact {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detail-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    background: var(--color-bg-secondary, #f9f9f9);
+    border-radius: 8px;
+}
+
+.detail-label {
+    font-size: 20px;
+    flex-shrink: 0;
+    line-height: 1.4;
+}
+
+.detail-content {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    flex: 1;
+}
+
+/* ========================================
+   历史记录功能样式
+   ======================================== */
+
+/* 历史记录按钮 - 首页右上角 */
+.history-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: white;
+    border: 2px solid var(--color-ink-light);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-sm);
+    z-index: 10;
+}
+
+.history-btn:hover {
+    background: var(--color-bg-secondary);
+    border-color: var(--color-vermilion);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+.history-btn:active {
+    transform: scale(0.98);
+}
+
+.history-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background: var(--color-vermilion);
+    color: white;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* 历史记录列表 */
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.history-item {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    transition: all var(--transition-base);
+    cursor: pointer;
+}
+
+.history-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-vermilion);
+}
+
+.history-date {
+    flex: 0 0 auto;
+    text-align: center;
+}
+
+.history-date > div:first-child {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+}
+
+.history-date > div:last-child {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+
+.history-content {
+    flex: 1;
+}
+
+.history-city {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    background: linear-gradient(90deg, var(--color-vermilion), var(--color-gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.history-element {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text-secondary);
+}
+
+.history-delete {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    background: white;
+    border: 1px solid var(--color-vermilion);
+    color: var(--color-vermilion);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all var(--transition-base);
+}
+
+.history-delete:hover {
+    background: var(--color-vermilion);
+    color: white;
+    transform: scale(1.05);
+}
+
+.history-delete:active {
+    transform: scale(0.95);
+}
+
+/* 返回按钮 */
+.btn-back {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color var(--transition-base);
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+}
+
+.btn-back:hover {
+    color: var(--color-vermilion);
+    background: var(--color-bg-secondary);
+}
+
+/* 空状态提示 */
+.history-empty {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.history-empty-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.history-empty-text {
+    font-size: 18px;
+    color: var(--color-text-primary);
+    margin-bottom: 8px;
+}
+
+.history-empty-hint {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+/* 清空按钮 */
+.btn-clear-all {
+    width: 100%;
+    padding: 12px;
+    background: white;
+    border: 1px solid var(--color-vermilion);
+    color: var(--color-vermilion);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all var(--transition-base);
+    margin-top: 16px;
+}
+
+.btn-clear-all:hover {
+    background: var(--color-vermilion);
+    color: white;
+}
+
+/* 响应式适配 */
+@media (max-width: 480px) {
+    .history-btn {
+        top: 16px;
+        right: 16px;
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+
+    .history-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .history-delete {
+        align-self: flex-end;
+    }
+}

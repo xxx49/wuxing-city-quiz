@@ -1,0 +1,1340 @@
+/* ========================================
+   东方新中式设计系统 - CSS变量
+   ======================================== */
+
+:root {
+    /* 五行主色 */
+    --wuxing-wood: #4A7C23;      /* 木 - 森绿 */
+    --wuxing-fire: #C8161D;      /* 火 - 朱红 */
+    --wuxing-earth: #8B7355;     /* 土 - 褐土 */
+    --wuxing-metal: #D4AF37;     /* 金 - 金黄 */
+    --wuxing-water: #1E90FF;     /* 水 - 海蓝 */
+    --wuxing-gold: #D4AF37;      /* 金色 - 用于强调 */
+
+    /* 传统色彩 */
+    --color-ink-dark: #2C1810;      /* 墨黑 - 浓墨 */
+    --color-ink-medium: #3D3D3D;    /* 淡墨 - 优化对比度符合WCAG AA */
+    --color-ink-light: #C8C8C8;     /* 极淡墨 */
+
+    --color-vermilion: #C8102E;     /* 朱红 */
+    --color-vermilion-dark: #8B0A12;
+    --color-vermilion-light: #E8A6A8;
+
+    --color-gold: #D4AF37;          /* 金色 */
+    --color-gold-dark: #B8941F;
+    --color-gold-light: #F0D86E;
+
+    --color-rice: #FDF5E6;          /* 宣纸白 */
+    --color-rice-dark: #F5EDE0;
+
+    /* 中性色 */
+    --color-bg-primary: var(--color-rice);
+    --color-bg-secondary: #F5F5F5;
+    --color-text-primary: var(--color-ink-dark);
+    --color-text-secondary: var(--color-ink-medium);
+
+    /* 间距系统 - 统一标准 */
+    --space-xs: 8px;   /* 元素内的小间距 */
+    --space-sm: 12px;  /* 紧凑元素间距 */
+    --space-md: 16px;  /* 标准间距 */
+    --space-lg: 24px;  /* 大型元素间距 */
+    --space-xl: 32px;  /* 页面级间距 */
+    --space-2xl: 48px;
+
+    /* 圆角 */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+
+    /* 阴影 */
+    --shadow-sm: 0 2px 4px rgba(44, 24, 16, 0.08);
+    --shadow-md: 0 4px 12px rgba(44, 24, 16, 0.12);
+    --shadow-lg: 0 8px 24px rgba(44, 24, 16, 0.16);
+
+    /* 字体 */
+    --font-family-title: 'STKaiti', 'KaiTi', '楷体', serif;
+    --font-family-body: 'PingFang SC', 'Source Han Sans CN', -apple-system, sans-serif;
+    --font-family-decorative: 'STZhuan', '隶书', serif;
+
+    /* 字体大小系统 - 移动端友好 */
+    --font-size-title: 20px;      /* 页面标题 */
+    --font-size-question: 18px;   /* 问题文字 */
+    --font-size-option: 16px;     /* 选项文字 */
+    --font-size-body: 15px;       /* 正文/描述 */
+    --font-size-caption: 13px;    /* 辅助信息 */
+
+    /* 过渡 */
+    --transition-fast: 150ms ease;
+    --transition-base: 300ms ease;
+    --transition-slow: 600ms ease;
+}
+
+/* ========================================
+   基础重置样式
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-body);
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+#app {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* ========================================
+   通用组件
+   ======================================== */
+
+/* 按钮 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    font-size: 17px;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    font-family: var(--font-family-body);
+    /* 触摸优化 */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    min-height: 48px; /* 确保触摸目标至少48px */
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-vermilion), var(--color-gold));
+    color: white;
+    box-shadow: 0 4px 12px rgba(200, 16, 46, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(200, 16, 46, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: 0 2px 8px rgba(200, 16, 46, 0.3);
+}
+
+.btn-secondary {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-ink-light);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-rice-dark);
+    border-color: var(--color-ink-light);
+}
+
+.btn-secondary:active {
+    transform: scale(0.98);
+    background-color: var(--color-bg-secondary);
+}
+
+/* 卡片 */
+.card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--space-md);
+}
+
+/* 标题 */
+.title {
+    font-family: var(--font-family-title);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-size: 17px;
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+
+/* 容器 */
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--space-lg);
+}
+
+/* 隐藏类 */
+.hidden {
+    display: none !important;
+}
+
+/* 淡入动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn var(--transition-slow) ease-out;
+}
+
+/* ===== 3城市结果页样式 ===== */
+
+/* 结果页头部 */
+.result-header {
+    text-align: center;
+    margin-bottom: 32px;
+    padding: 24px;
+}
+
+.result-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.result-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--color-ink-dark);
+    margin-bottom: 8px;
+}
+
+.result-subtitle {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+}
+
+/* ===== 先天五行展示样式 ===== */
+.element-result {
+    background: white;
+    border: 2px solid var(--color-gold);
+    border-radius: 16px;
+    padding: 32px 24px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.main-element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.element-icon {
+    font-size: 72px;
+    margin-bottom: 16px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.element-name {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--color-ink-dark);
+    text-align: center;
+    margin: 0;
+}
+
+.element-description {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-top: 16px;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* 先天五行页面的按钮居中 */
+#start-quiz-btn {
+    display: block;
+    margin: 32px auto 0;
+    width: 100%;
+    max-width: 320px;
+}
+
+/* ===== 第1城市卡片 - 主要推荐 ===== */
+.city-card.primary {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.08), rgba(212, 175, 55, 0.05));
+    border: 2px solid var(--color-vermilion);
+    padding: 32px 24px;
+    border-radius: 16px;
+    margin-bottom: var(--space-lg);
+    box-shadow: 0 8px 32px rgba(220, 38, 38, 0.15);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.city-card.primary .city-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.city-rank {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-vermilion);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.city-name {
+    font-size: 48px;
+    font-weight: 800;
+    background: linear-gradient(90deg, var(--color-vermilion), var(--color-gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 16px;
+}
+
+.city-element {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.element-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.element-dot.element-wood {
+    background: var(--wuxing-wood);
+}
+
+.element-dot.element-fire {
+    background: var(--wuxing-fire);
+}
+
+.element-dot.element-earth {
+    background: var(--wuxing-earth);
+}
+
+.element-dot.element-metal {
+    background: var(--wuxing-metal);
+}
+
+.element-dot.element-water {
+    background: var(--wuxing-water);
+}
+
+.city-match {
+    display: flex;
+    justify-content: center;
+    margin: 24px 0;
+}
+
+.match-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-vermilion), var(--color-gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(220, 38, 38, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.match-value {
+    font-size: 42px;
+    font-weight: 800;
+    color: white;
+}
+
+.city-analysis {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.analysis-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--color-text-primary);
+}
+
+.analysis-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.city-suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.suggestion-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.suggestion-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+}
+
+.suggestion-content {
+    font-size: 15px;
+    color: var(--color-text-primary);
+    line-height: 1.6;
+}
+
+/* ===== 第2-3城市卡片 - 次要推荐 ===== */
+.city-card.secondary {
+    background: white;
+    border: 1px solid #e5e7eb;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: var(--space-md);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease-out;
+    animation-delay: 0.2s;
+}
+
+.city-card.secondary:hover {
+    border-color: var(--color-vermilion);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.city-header-compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.city-info {
+    flex: 1;
+}
+
+.city-name-small {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+}
+
+.city-element-small {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+}
+
+.match-badge {
+    padding: 8px 16px;
+    background: linear-gradient(135deg, var(--color-vermilion), var(--color-gold));
+    color: white;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.city-desc-compact {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    padding-left: 12px;
+}
+
+/* 五行分析 - 紧凑版（用于第2-3城市） */
+.city-analysis-compact {
+    background: linear-gradient(135deg, rgba(200, 22, 29, 0.03), rgba(212, 175, 55, 0.02));
+    padding: 14px 16px;
+    border-radius: 8px;
+    margin: 12px 0;
+    border-left: 3px solid var(--color-vermilion);
+}
+
+.city-analysis-compact p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* ===== 底部按钮组 ===== */
+.result-actions {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    /* 触摸优化 */
+    position: sticky;
+    bottom: 0;
+    background: linear-gradient(to top, var(--color-bg-primary) 85%, transparent);
+    padding: 16px 0;
+    z-index: 100;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+/* ===== 动画 ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== 触摸优化 - 加速响应 ===== */
+
+/* 所有可点击元素的基础优化 */
+.btn,
+.option,
+.date-input {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+/* 选项卡片基础样式 */
+.option {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    background: white;
+    border: 2px solid #E0E0E0;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 选项标签（A、B、C、D） */
+.option-label {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #F5F5F5;
+    border: 2px solid #E0E0E0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--color-ink-medium);
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+/* 选项文字 */
+.option-text {
+    flex: 1;
+    font-size: 15px;
+    color: var(--color-ink-dark);
+    line-height: 1.5;
+}
+
+/* 选项悬停效果 */
+.option:hover {
+    border-color: var(--color-vermilion);
+    background: var(--color-rice);
+}
+
+/* 选项选中效果（通过JavaScript添加.selected类） */
+.option.selected {
+    background: var(--color-rice);
+    border-color: var(--color-vermilion);
+    box-shadow: 0 2px 8px rgba(200, 16, 46, 0.2);
+}
+
+.option.selected .option-label {
+    background: var(--color-vermilion);
+    color: white;
+    border-color: var(--color-vermilion);
+}
+
+/* 选项点击时的临时效果 */
+.option:active {
+    transform: scale(0.98);
+}
+
+/* 禁用焦点默认样式 */
+.option:focus {
+    outline: none;
+}
+
+/* 确保其他伪类不会影响 */
+.option:visited,
+.option:selected,
+.option:checked {
+    background: white;
+    border-color: #E0E0E0;
+}
+
+/* 生日输入下拉框优化 */
+.date-input {
+    min-height: 48px; /* 确保触摸目标至少44px */
+    font-size: 16px; /* 防止iOS自动缩放 */
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%233D3D3D' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+}
+
+.date-input:active {
+    border-color: var(--color-vermilion);
+    background-color: var(--color-rice-dark);
+}
+
+/* ===== 响应式断点系统 ===== */
+
+/* 1. 小屏手机（iPhone SE等）- 375px及以下 */
+@media (max-width: 375px) {
+    /* ===== 容器间距 - 更紧凑 ===== */
+    .container {
+        padding: 12px;
+    }
+
+    /* ===== 选项卡片 - 紧凑间距 ===== */
+    .option {
+        padding: 12px 14px;
+    }
+
+    /* ===== 触摸优化 - 小屏设备 ===== */
+
+    /* 按钮最小触摸目标 */
+    .btn {
+        min-height: 48px;
+        min-width: 48px;
+        padding: 12px 24px;
+    }
+
+    /* 选项卡片触摸区域 */
+    .option {
+        min-height: 48px;
+        margin-bottom: 12px; /* 确保选项之间有足够间距 */
+    }
+
+    /* 生日输入框优化 */
+    .date-input {
+        min-height: 48px;
+        padding: 12px;
+        padding-right: 40px;
+        font-size: 16px;
+    }
+
+    /* 结果页按钮组固定底部 */
+    .result-actions {
+        position: sticky;
+        bottom: 0;
+        background: linear-gradient(to top, var(--color-bg-primary) 90%, transparent);
+        padding: 12px 0;
+        margin-bottom: -12px; /* 补偿container的padding */
+        z-index: 100;
+    }
+
+    /* 确保第1城市卡片不会被底部按钮遮挡 */
+    .city-card.primary {
+        margin-bottom: var(--space-lg);
+    }
+
+    /* ===== 字体大小系统优化 ===== */
+
+    /* 页面标题 - 20px */
+    .title {
+        font-size: var(--font-size-title);
+        line-height: 1.3;
+        margin-bottom: 20px;
+    }
+
+    .result-title {
+        font-size: var(--font-size-title);
+        line-height: 1.3;
+    }
+
+    /* 副标题/辅助信息 - 13px */
+    .subtitle {
+        font-size: var(--font-size-caption);
+        line-height: 1.4;
+        margin-bottom: var(--space-md);
+    }
+
+    .result-subtitle {
+        font-size: var(--font-size-caption);
+        line-height: 1.4;
+    }
+
+    /* 问题文字 - 18px */
+    .question-text {
+        font-size: var(--font-size-question);
+        line-height: 1.5;
+    }
+
+    /* 选项文字 - 16px */
+    .option-text {
+        font-size: var(--font-size-option);
+        line-height: 1.4;
+    }
+
+    /* 第1城市名称 - 36px（小屏优化） */
+    .city-name {
+        font-size: 36px;
+        line-height: 1.2;
+    }
+
+    /* 第2-3城市名称 - 24px */
+    .city-name-small {
+        font-size: 24px;
+        line-height: 1.3;
+    }
+
+    /* 分析文字 - 15px */
+    .analysis-text {
+        font-size: var(--font-size-body);
+        line-height: 1.6;
+    }
+
+    /* 建议内容 - 15px */
+    .suggestion-content {
+        font-size: var(--font-size-body);
+        line-height: 1.6;
+    }
+
+    /* 详情内容 - 15px */
+    .detail-content {
+        font-size: var(--font-size-body);
+        line-height: 1.5;
+    }
+
+    /* 城市描述 - 15px */
+    .city-desc-compact {
+        font-size: var(--font-size-body);
+        line-height: 1.6;
+    }
+
+    /* 城市分析紧凑版 - 14px */
+    .city-analysis-compact p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* 匹配圆圈 - 稍小 */
+    .match-circle {
+        width: 110px;
+        height: 110px;
+    }
+
+    .match-value {
+        font-size: 32px;
+    }
+
+    /* 第1城市卡片 - 主要卡片紧凑间距 */
+    .city-card.primary {
+        padding: 20px 14px;
+        margin-bottom: var(--space-md);
+    }
+
+    /* 第2-3城市卡片 - 次要卡片 */
+    .city-card.secondary {
+        margin-bottom: var(--space-sm);
+        padding: 16px;
+    }
+
+    /* 按钮组 */
+    .result-actions {
+        margin-top: var(--space-lg);
+        gap: var(--space-sm);
+    }
+}
+
+/* 2. 中等手机（iPhone 13/14, Pixel等）- 376px到414px */
+@media (min-width: 376px) and (max-width: 414px) {
+    /* ===== 容器间距 - 标准间距 ===== */
+    .container {
+        padding: 16px;
+    }
+
+    /* ===== 选项卡片 - 标准间距 ===== */
+    .option {
+        padding: 14px 16px;
+    }
+
+    /* ===== 触摸优化 - 中等屏设备 ===== */
+
+    /* 按钮触摸目标 */
+    .btn {
+        min-height: 48px;
+        min-width: 48px;
+    }
+
+    /* 选项卡片触摸区域 */
+    .option {
+        min-height: 48px;
+        margin-bottom: 12px;
+    }
+
+    /* 生日输入框优化 */
+    .date-input {
+        min-height: 48px;
+        padding: 14px;
+        padding-right: 40px;
+        font-size: 16px;
+    }
+
+    /* 结果页按钮组固定底部 */
+    .result-actions {
+        position: sticky;
+        bottom: 0;
+        background: linear-gradient(to top, var(--color-bg-primary) 90%, transparent);
+        padding: 16px 0;
+        margin-bottom: -16px; /* 补偿container的padding */
+        z-index: 100;
+    }
+
+    /* 确保第1城市卡片不会被底部按钮遮挡 */
+    .city-card.primary {
+        margin-bottom: var(--space-lg);
+    }
+
+    /* ===== 字体大小系统优化 ===== */
+
+    /* 页面标题 - 20px */
+    .title {
+        font-size: var(--font-size-title);
+        line-height: 1.3;
+        margin-bottom: 20px;
+    }
+
+    .result-title {
+        font-size: var(--font-size-title);
+        line-height: 1.3;
+    }
+
+    /* 副标题/辅助信息 - 13px */
+    .subtitle {
+        font-size: var(--font-size-caption);
+        line-height: 1.4;
+        margin-bottom: var(--space-md);
+    }
+
+    .result-subtitle {
+        font-size: var(--font-size-caption);
+        line-height: 1.4;
+    }
+
+    /* 问题文字 - 18px */
+    .question-text {
+        font-size: var(--font-size-question);
+        line-height: 1.5;
+    }
+
+    /* 选项文字 - 16px */
+    .option-text {
+        font-size: var(--font-size-option);
+        line-height: 1.4;
+    }
+
+    /* 第1城市名称 - 38px（中等屏） */
+    .city-name {
+        font-size: 38px;
+        line-height: 1.2;
+    }
+
+    /* 第2-3城市名称 - 26px */
+    .city-name-small {
+        font-size: 26px;
+        line-height: 1.3;
+    }
+
+    /* 分析文字 - 15px */
+    .analysis-text {
+        font-size: var(--font-size-body);
+        line-height: 1.6;
+    }
+
+    /* 建议内容 - 15px */
+    .suggestion-content {
+        font-size: var(--font-size-body);
+        line-height: 1.6;
+    }
+
+    /* 详情内容 - 15px */
+    .detail-content {
+        font-size: var(--font-size-body);
+        line-height: 1.5;
+    }
+
+    /* 城市描述 - 15px */
+    .city-desc-compact {
+        font-size: var(--font-size-body);
+        line-height: 1.6;
+    }
+
+    /* 城市分析紧凑版 - 14px */
+    .city-analysis-compact p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* 匹配圆圈 - 中等大小 */
+    .match-circle {
+        width: 120px;
+        height: 120px;
+    }
+
+    .match-value {
+        font-size: 36px;
+    }
+
+    /* 第1城市卡片 - 主要卡片标准间距 */
+    .city-card.primary {
+        padding: 24px 16px;
+        margin-bottom: var(--space-lg);
+    }
+
+    /* 第2-3城市卡片 - 次要卡片 */
+    .city-card.secondary {
+        margin-bottom: var(--space-md);
+    }
+
+    /* 按钮组 */
+    .result-actions {
+        margin-top: 40px;
+        gap: var(--space-sm);
+    }
+}
+
+/* 3. 大屏手机（iPhone Pro Max, Plus等）- 415px及以上 */
+@media (min-width: 415px) {
+    /* ===== 容器间距 - 更舒适，居中显示 ===== */
+    .container {
+        padding: 20px;
+        max-width: 480px;
+        margin: 0 auto;
+    }
+
+    /* ===== 选项卡片 - 舒适间距 ===== */
+    .option {
+        padding: 16px 18px;
+    }
+
+    /* ===== 触摸优化 - 大屏设备 ===== */
+
+    /* 按钮触摸目标 */
+    .btn {
+        min-height: 48px;
+        min-width: 48px;
+    }
+
+    /* 选项卡片触摸区域 */
+    .option {
+        min-height: 48px;
+        margin-bottom: 12px;
+    }
+
+    /* 生日输入框优化 */
+    .date-input {
+        min-height: 48px;
+        padding: 16px;
+        padding-right: 40px;
+        font-size: 16px;
+    }
+
+    /* 结果页按钮组固定底部 */
+    .result-actions {
+        position: sticky;
+        bottom: 0;
+        background: linear-gradient(to top, var(--color-bg-primary) 90%, transparent);
+        padding: 20px 0;
+        margin-bottom: -20px; /* 补偿container的padding */
+        z-index: 100;
+    }
+
+    /* 确保第1城市卡片不会被底部按钮遮挡 */
+    .city-card.primary {
+        margin-bottom: var(--space-lg);
+    }
+
+    /* ===== 字体大小系统优化 ===== */
+
+    /* 页面标题 - 保持原尺寸或略大 */
+    .title {
+        font-size: 22px;
+        line-height: 1.3;
+        margin-bottom: 20px;
+    }
+
+    .result-title {
+        font-size: 22px;
+        line-height: 1.3;
+    }
+
+    /* 副标题/辅助信息 */
+    .subtitle {
+        font-size: 14px;
+        line-height: 1.4;
+        margin-bottom: var(--space-md);
+    }
+
+    .result-subtitle {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    /* 问题文字 - 18px */
+    .question-text {
+        font-size: var(--font-size-question);
+        line-height: 1.5;
+    }
+
+    /* 选项文字 - 16px */
+    .option-text {
+        font-size: var(--font-size-option);
+        line-height: 1.4;
+    }
+
+    /* 第1城市名称 - 40px（大屏优化） */
+    .city-name {
+        font-size: 40px;
+        line-height: 1.2;
+    }
+
+    /* 第2-3城市名称 - 26px */
+    .city-name-small {
+        font-size: 26px;
+        line-height: 1.3;
+    }
+
+    /* 分析文字 - 15px */
+    .analysis-text {
+        font-size: var(--font-size-body);
+        line-height: 1.6;
+    }
+
+    /* 建议内容 - 15px */
+    .suggestion-content {
+        font-size: var(--font-size-body);
+        line-height: 1.6;
+    }
+
+    /* 详情内容 - 15px */
+    .detail-content {
+        font-size: var(--font-size-body);
+        line-height: 1.5;
+    }
+
+    /* 城市描述 - 15px */
+    .city-desc-compact {
+        font-size: var(--font-size-body);
+        line-height: 1.6;
+    }
+
+    /* 城市分析紧凑版 - 14px */
+    .city-analysis-compact p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* 匹配圆圈 - 标准大小 */
+    .match-circle {
+        width: 130px;
+        height: 130px;
+    }
+
+    .match-value {
+        font-size: 38px;
+    }
+
+    /* 第1城市卡片 - 主要卡片舒适间距 */
+    .city-card.primary {
+        padding: 28px 20px;
+        margin-bottom: var(--space-lg);
+    }
+
+    /* 第2-3城市卡片 - 次要卡片 */
+    .city-card.secondary {
+        margin-bottom: var(--space-md);
+        padding: 20px;
+    }
+
+    /* 按钮组 */
+    .result-actions {
+        margin-top: 40px;
+        gap: var(--space-sm);
+    }
+}
+
+/* ===== 向后兼容：保留原有的480px断点（作为后备） ===== */
+@media (max-width: 480px) {
+    /* ===== 触摸优化 - 后备断点 ===== */
+
+    /* 答题页面自动滚动优化 */
+    .question-card {
+        scroll-margin-top: 20px;
+    }
+
+    /* 选项卡片确保可见 */
+    .option {
+        scroll-margin-top: 20px;
+        scroll-margin-bottom: 20px;
+    }
+}
+
+/* ===== 性能优化 - 硬件加速动画 ===== */
+
+/* 使用transform和opacity进行动画（GPU加速） */
+.btn,
+.option,
+.city-card {
+    will-change: transform;
+    transform: translateZ(0); /* 强制GPU加速 */
+    backface-visibility: hidden; /* 防止闪烁 */
+}
+
+/* 动画结束后移除will-change */
+.btn:not(:active):not(:hover),
+.option:not(:active),
+.city-card:not(:hover) {
+    will-change: auto;
+}
+
+/* 确保所有触摸反馈动画流畅（60fps） */
+.btn:active {
+    transform: scale(0.98) translateZ(0);
+    transition: transform 100ms ease-out; /* 快速响应 */
+}
+
+/* 选项不使用 :active 状态，避免视觉残留 */
+.option:active {
+    transform: none !important;
+}
+
+/* 防止误触 - z-index层级管理 */
+.result-actions {
+    z-index: 100;
+}
+
+.city-card.primary {
+    z-index: 1;
+}
+
+.city-card.secondary {
+    z-index: 1;
+}
+
+/* 答题页面 - 确保下一题自动滚动到可见位置 */
+.question-card {
+    scroll-behavior: smooth;
+}
+
+.option {
+    scroll-margin-top: 20px;
+}
+
+/* 移除长按选中文本（防止误触） */
+.btn,
+.option {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* 防止双击缩放 */
+.btn,
+.option,
+.date-input {
+    touch-action: manipulation;
+}
+
+/* 确保所有按钮有足够的点击区域 */
+.btn {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* ===== 第2-3城市详情样式 ===== */
+.city-details-compact {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detail-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+    background: var(--color-bg-secondary, #f9f9f9);
+    border-radius: 8px;
+}
+
+.detail-label {
+    font-size: 20px;
+    flex-shrink: 0;
+    line-height: 1.4;
+}
+
+.detail-content {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    flex: 1;
+}
+
+
+/* ===== 大卡片渐变风格首页（选项B） ===== */
+
+/* 英雄区渐变背景 */
+.hero-section {
+    background: linear-gradient(135deg, var(--wuxing-wood) 0%, var(--wuxing-water) 100%);
+    padding: 60px 20px;
+    border-radius: 20px;
+    margin-bottom: 32px;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    opacity: 0.9;
+    margin-bottom: 24px;
+}
+
+/* 特征标签 */
+.feature-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.feature-tag {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* 日期卡片 */
+.date-card {
+    background: linear-gradient(135deg, var(--color-rice) 0%, #fff 100%);
+    border: 2px solid var(--color-gold);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
+}
+
+.date-card h3 {
+    margin: 0 0 16px 0;
+    color: var(--color-ink-dark);
+}
+
+/* 脉冲动画 */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.1; }
+    50% { transform: scale(1.05); opacity: 0.2; }
+}
+
+/* 移动端适配 */
+@media (max-width: 480px) {
+    .hero-section {
+        padding: 40px 16px;
+    }
+    .hero-title {
+        font-size: 36px;
+    }
+    .hero-subtitle {
+        font-size: 16px;
+    }
+    .date-card {
+        padding: 20px 16px;
+    }
+    .feature-tags {
+        gap: 8px;
+    }
+    .feature-tag {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}

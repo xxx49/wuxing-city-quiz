@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>测试页面</title>
+</head>
+<body>
+    <h1>测试页面加载</h1>
+    <div id="console"></div>
+
+    <script>
+        const consoleEl = document.getElementById('console');
+
+        function log(msg) {
+            consoleEl.innerHTML += '<p>' + msg + '</p>';
+            console.log(msg);
+        }
+
+        log('✅ HTML加载成功');
+
+        // 测试加载每个JS文件
+        log('开始加载JS文件...');
+
+        // 测试data.js
+        const script1 = document.createElement('script');
+        script1.src = 'js/data.js';
+        script1.onload = () => log('✅ data.js 加载成功');
+        script1.onerror = () => log('❌ data.js 加载失败');
+        document.head.appendChild(script1);
+
+        // 测试utils.js
+        const script2 = document.createElement('script');
+        script2.src = 'js/utils.js';
+        script2.onload = () => log('✅ utils.js 加载成功');
+        script2.onerror = () => log('❌ utils.js 加载失败');
+        document.head.appendChild(script2);
+
+        // 测试storage.js
+        const script3 = document.createElement('script');
+        script3.src = 'js/storage.js';
+        script3.onload = () => log('✅ storage.js 加载成功');
+        script3.onerror = () => log('❌ storage.js 加载失败');
+        document.head.appendChild(script3);
+
+        // 测试app.js
+        const script4 = document.createElement('script');
+        script4.src = 'js/app.js';
+        script4.onload = () => {
+            log('✅ app.js 加载成功');
+            // 检查QUIZ_QUESTIONS_30是否存在
+            if (typeof QUIZ_QUESTIONS_30 !== 'undefined') {
+                log('✅ QUIZ_QUESTIONS_30 已定义，长度: ' + QUIZ_QUESTIONS_30.length);
+            } else {
+                log('❌ QUIZ_QUESTIONS_30 未定义！');
+            }
+        };
+        script4.onerror = () => log('❌ app.js 加载失败');
+        document.head.appendChild(script4);
+    </script>
+</body>
+</html>
