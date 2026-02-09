@@ -28,6 +28,7 @@ index-v2.html
 # 文档（部署时不需要）
 *.md
 !README.md
+!knowledge/*.md
 
 # 其他
 cookies.txt
